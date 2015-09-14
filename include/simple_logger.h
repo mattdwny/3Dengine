@@ -1,5 +1,4 @@
-#ifndef __SIMPLE_LOGGER__
-#define __SIMPLE_LOGGER__
+#pragma once
 /**
  * simple_logger
  * @license The MIT License (MIT)
@@ -35,7 +34,4 @@ void init_logger(const char *log_file_path);
 */
 #define slog(...) _slog(__FILE__,__LINE__,__VA_ARGS__)
 void _slog(char *f,int l,char *msg,...);
-
-
-#endif
 

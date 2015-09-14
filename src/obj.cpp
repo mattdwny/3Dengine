@@ -1,3 +1,4 @@
+#include <cstring>
 #include <stdio.h>
 #include <stdlib.h>
 #include "obj.h"
@@ -143,7 +144,7 @@ void obj_allocate(Obj *model)
     if (!model)return;
     if (model->num_vertices)
     {
-        model->vertex_array = malloc(sizeof(float)*3*model->num_vertices);
+        model->vertex_array = (float*) malloc(sizeof(float)*3*model->num_vertices);
         if (model->vertex_array)
         {
             memset(model->vertex_array,0,sizeof(float)*3*model->num_vertices);
@@ -151,7 +152,7 @@ void obj_allocate(Obj *model)
     }
     if (model->num_normals)
     {
-        model->normal_array = malloc(sizeof(float)*3*model->num_normals);
+        model->normal_array = (float*) malloc(sizeof(float)*3*model->num_normals);
         if (model->normal_array)
         {
             memset(model->normal_array,0,sizeof(float)*3*model->num_normals);
@@ -159,7 +160,7 @@ void obj_allocate(Obj *model)
     }
     if (model->num_texels)
     {
-        model->texel_array = malloc(sizeof(float)*2*model->num_texels);
+        model->texel_array = (float*) malloc(sizeof(float)*2*model->num_texels);
         if (model->texel_array)
         {
             memset(model->texel_array,0,sizeof(float)*2*model->num_texels);
@@ -167,7 +168,7 @@ void obj_allocate(Obj *model)
     }
     if (model->num_tris)
     {
-        model->triangle_array = malloc(sizeof(ObjTriangle)*model->num_tris);
+        model->triangle_array = (ObjTriangle*) malloc(sizeof(ObjTriangle)*model->num_tris);
         if (model->triangle_array)
         {
             memset(model->triangle_array,0,sizeof(ObjTriangle)*model->num_tris);

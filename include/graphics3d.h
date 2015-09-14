@@ -1,5 +1,4 @@
-#ifndef __GRAPHICS3D_H__
-#define __GRAPHICS3D_H__
+#pragma once
 
 /**
  * graphics3d
@@ -60,5 +59,3 @@ void graphics3d_frame_begin();
  * @brief advance the frame, taking into account desired frame rate
  */
 void graphics3d_next_frame();
-
-#endif

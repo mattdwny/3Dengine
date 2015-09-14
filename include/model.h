@@ -1,5 +1,4 @@
-#ifndef __MODEL_H__
-#define __MODEL_H__
+#pragma once
 /**
  * model
  * @license The MIT License (MIT)
@@ -20,6 +19,7 @@
  *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *    SOFTWARE.
  */
+#include <cstring>
 #include <SDL.h>
 #include "sprite.h"
 #include "vector.h"
@@ -116,5 +116,3 @@ int model_allocate_attribute_buffer(Model *model, GLuint attributes);
  */
 int model_allocate_vertex_buffer(Model *model, GLuint vertices);
 
-
-#endif

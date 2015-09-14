@@ -1,3 +1,4 @@
+#include <cstring>
 #include <SDL_image.h>
 
 #include "simple_logger.h"

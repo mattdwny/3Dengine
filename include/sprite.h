@@ -1,5 +1,4 @@
-#ifndef __SPRITE__
-#define __SPRITE__
+#pragma once
 
 #include <SDL.h>
 #include "graphics3d.h"
@@ -49,7 +48,3 @@ void DrawSprite(Sprite *sprite,SDL_Surface *surface,int sx,int sy, int frame);
  * @brief clears all loaded sprites in system.  Called before program exit
  */
 void CloseSprites();
-
-
-
-#endif

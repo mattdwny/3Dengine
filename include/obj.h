@@ -1,5 +1,4 @@
-#ifndef __OBJ_H__
-#define __OBJ_H__
+#pragma once
 /**
  * obj
  * @license The MIT License (MIT)
@@ -92,6 +91,3 @@ void obj_draw(
     Vec4D color,
     Sprite *texture
 );
-
-
-#endif
