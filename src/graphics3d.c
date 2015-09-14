@@ -1,6 +1,7 @@
 #include "graphics3d.h"
 #include "simple_logger.h"
 #include "shader.h"
+#include <GL/gl.h>
 #include <GL/glu.h>
 
 
@@ -79,7 +80,7 @@ int graphics3d_init(int sw,int sh,int fullscreen,const char *project,Uint32 fram
     glLoadIdentity();
     /*view angle, aspect ratio, near clip distance, far clip distance*/
     /*TODO: put near/far clip in graphics view config*/
-    gluPerspective( 40, (float)sw / (float)sh, .01, 2000.0f);
+    gluPerspective( 40, (float)sw / (float)sh, 0.01, 2000.0);
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
 

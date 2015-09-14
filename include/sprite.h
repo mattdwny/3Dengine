@@ -1,8 +1,8 @@
 #ifndef __SPRITE__
 #define __SPRITE__
 
-#include "graphics3d.h"
 #include <SDL.h>
+#include "graphics3d.h"
 
 #define MAXSPRITEFILENAME 512
 

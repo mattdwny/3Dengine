@@ -2,7 +2,7 @@
 #define __GRAPHICS3D_H__
 
 /**
- * simple_logger
+ * graphics3d
  * @license The MIT License (MIT)
  *   @copyright Copyright (c) 2015 EngineerOfLies
  *    Permission is hereby granted, free of charge, to any person obtaining a copy

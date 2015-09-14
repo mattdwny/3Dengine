@@ -1,8 +1,8 @@
-#include "sprite.h"
+#include <SDL_image.h>
+
 #include "simple_logger.h"
 #include "graphics3d.h"
-
-#include <SDL_image.h>
+#include "sprite.h"
 
 #define MaxSprites    1024
 
