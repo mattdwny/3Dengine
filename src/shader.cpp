@@ -1,6 +1,7 @@
-#include "shader.h"
+#include <cstdio>
+
 #include "simple_logger.h"
-#include <stdio.h>
+#include "shader.h"
 
 GLuint BuildShaderProgram(const char *vsPath, const char *fsPath)
 {
@@ -26,7 +27,7 @@ GLuint BuildShaderProgram(const char *vsPath, const char *fsPath)
     {
         glGetProgramiv(tempProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
         
-        glGetProgramInfoLog(tempProgram, infoLogLength, NULL, strInfoLog);
+        glGetProgramInfoLog(tempProgram, infoLogLength, nullptr, strInfoLog);
         
         slog("Shader linker failure: %s", strInfoLog);
         return 0;
@@ -66,7 +67,7 @@ GLuint CreateShader(GLenum eShaderType, const char *strShaderFile)
     
     shader = glCreateShader(eShaderType);
     ss = shaderSource;
-    glShaderSource(shader, 1, &ss, NULL);
+    glShaderSource(shader, 1, &ss, nullptr);
     
     glCompileShader(shader);
     
@@ -75,7 +76,7 @@ GLuint CreateShader(GLenum eShaderType, const char *strShaderFile)
     {
         glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
         
-        glGetShaderInfoLog(shader, infoLogLength, NULL, strInfoLog);
+        glGetShaderInfoLog(shader, infoLogLength, nullptr, strInfoLog);
         
         switch(eShaderType)
         {
@@ -96,6 +97,3 @@ GLuint CreateShader(GLenum eShaderType, const char *strShaderFile)
     
     return shader;
 }
-
-
-/*eol@eof*/

@@ -1,4 +1,12 @@
 #pragma once
+
+#include <cstring>
+
+#include "SDL.h"
+
+#include "Texture.h"
+#include "vector.h"
+
 /**
  * model
  * @license The MIT License (MIT)
@@ -19,10 +27,6 @@
  *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *    SOFTWARE.
  */
-#include <cstring>
-#include <SDL.h>
-#include "sprite.h"
-#include "vector.h"
 
 typedef struct Model_S
 {
@@ -39,7 +43,7 @@ typedef struct Model_S
 
     GLuint *triangle_array;
     
-    Sprite *texture;        /**<pointer to texture data*/
+    Texture* texture;        /**<pointer to texture data*/
     Uint8 used;             /**<refcount*/
 }Model;
 
@@ -51,7 +55,7 @@ void model_init();
 
 /**
  * @brief get a new model pointer
- * @return NULL on error or out of space, a zero initialized model pointer otherwise
+ * @return nullptr on error or out of space, a zero initialized model pointer otherwise
  */
 Model *model_new();
 
@@ -64,7 +68,7 @@ void model_free(Model *model);
 /**
  * @brief checks if the model file is already loaded and returns a pointer to it if it is
  * @param filename the file to check if its already loaded
- * @return NULL on error or not loaded, the model pointer otherwise
+ * @return nullptr on error or not loaded, the model pointer otherwise
  */
 Model *model_get_by_filename(char *filename);
 
@@ -115,4 +119,3 @@ int model_allocate_attribute_buffer(Model *model, GLuint attributes);
  * @return -1 on error or 0 otherwise
  */
 int model_allocate_vertex_buffer(Model *model, GLuint vertices);
-

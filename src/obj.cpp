@@ -1,10 +1,11 @@
+#include <cstdlib>
+#include <cstdio>
 #include <cstring>
-#include <stdio.h>
-#include <stdlib.h>
-#include "obj.h"
-#include "simple_logger.h"
 
-#define __obj_max 1024
+#include "simple_logger.h"
+#include "obj.h"
+
+constexpr std::size_t __obj_max = 1024;
 
 static Obj ObjList[__obj_max];
 
@@ -28,7 +29,7 @@ Obj *obj_new()
             return &ObjList[i];
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 Obj *obj_get_by_filename(char *filename)
@@ -42,7 +43,7 @@ Obj *obj_get_by_filename(char *filename)
             return &ObjList[i];
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 static void obj_delete(Obj *obj)
@@ -96,8 +97,8 @@ void obj_file_get_counts(Obj* model, FILE* file)
     int  numtexcoords = 0;
     int  numfaces = 0;
     
-    if ((file == NULL) ||
-        (model == NULL))
+    if ((file == nullptr) ||
+        (model == nullptr))
     {
         return;
     }
@@ -186,11 +187,11 @@ void obj_file_parse(Obj * model, FILE* file)
     float x,y,z;
     GLuint t1,t2,t3,v1,v2,v3,n1,n2,n3;
         
-    if (model == NULL)
+    if (model == nullptr)
     {
         return;
     }
-    if (file == NULL)
+    if (file == nullptr)
     {
         return;
     }
@@ -297,7 +298,7 @@ int obj_va_search(float *v,float *a,int count,float vtarget[3],float atarget[6])
 
 int obj_file_convert_to_model(Obj *objFile,Model *model)
 {
-    int i,j,count = 0;
+    int count = 0;
     int search = 0;
     float *vertices; /**<working vertex buffer*/
     float *attributes; /**<working attribute buffer*/
@@ -325,10 +326,10 @@ int obj_file_convert_to_model(Obj *objFile,Model *model)
     }
     
     /*for each triangle...*/
-    for (i = 0; i < objFile->num_tris;i++)
+    for (int i = 0; i < objFile->num_tris;i++)
     {
         /*for each triangle vertex...*/
-        for (j = 0;j < 3;j++)
+        for (int j = 0;j < 3;j++)
         {
             /*get a pointer to the vertex data*/
             vtarget = &objFile->vertex_array[objFile->triangle_array[i].p[j].v];
@@ -375,14 +376,14 @@ Obj *obj_load(char *filename)
     objFile = obj_new();
     if (!objFile)
     {
-        return NULL;
+        return nullptr;
     }
     
     file = fopen(filename,"r");
-    if (file == NULL)
+    if (file == nullptr)
     {
         slog("failed to open file %s",filename);
-        return NULL;
+        return nullptr;
     }
     
     
@@ -407,14 +408,14 @@ void obj_draw(
     Vec3D rotation,
     Vec3D scale,
     Vec4D color,
-    Sprite *texture
+    Texture* texture
              )
 {
     int i;
     ObjTriangle* triangle;
     float trans[4];
     
-    if (obj == NULL)
+    if (obj == nullptr)
     {
         slog("cannot draw obj, none specified!");
         return;
@@ -426,10 +427,10 @@ void obj_draw(
     glEnable(GL_NORMALIZE);
     glColorMaterial(GL_FRONT,GL_DIFFUSE);
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-    if(texture != NULL)
+    if(texture != nullptr)
     {
         glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D,texture->texture);
+        glBindTexture(GL_TEXTURE_2D,texture->getTex());
     }
     
     glEnable(GL_COLOR_MATERIAL);
@@ -515,7 +516,7 @@ void obj_draw(
     glDisable(GL_LIGHTING);
     glDisable(GL_BLEND);
     glDisable(GL_COLOR_MATERIAL);
-    if(texture != NULL)
+    if(texture != nullptr)
     {
         glDisable(GL_TEXTURE_2D);
     }    
@@ -534,23 +535,20 @@ Model *obj_load_model(char *filename)
     objFile = obj_load(filename);
     if (!objFile)
     {
-        return NULL;
+        return nullptr;
     }
     
     model = model_new();
     if (!model)
     {
-        return NULL;
+        return nullptr;
     }
         
     if (obj_file_convert_to_model(objFile,model) != 0)
     {
         model_free(model);        
-        return NULL;
+        return nullptr;
     }
     
     return model;
 }
-
-
-/*eol@eof*/

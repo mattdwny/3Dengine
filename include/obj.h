@@ -1,4 +1,8 @@
 #pragma once
+
+#include "model.h"
+#include "vector.h"
+
 /**
  * obj
  * @license The MIT License (MIT)
@@ -19,13 +23,10 @@
  *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *    SOFTWARE.
  */
-#include "model.h"
-#include "vector.h"
 
 /**
  * @purpse provide an interface to load and parse object files into the model data type
  */
-
 typedef struct TriPoint_S
 {
     GLuint v;   /**<vertex index*/
@@ -63,14 +64,14 @@ void obj_init();
 /**
  * @brief load an object file into a model
  * @param filename the object file to parse
- * @return NULL on failure or a model pointer otherwise;
+ * @return nullptr on failure or a model pointer otherwise;
  */
 Model *obj_load_model(char *filename);
 
 /**
  * @brief load an object file into an obj
  * @param filename the object file to parse
- * @return NULL on failure or an Obj pointer otherwise;
+ * @return nullptr on failure or an Obj pointer otherwise;
  */
 Obj *obj_load(char *filename);
 
@@ -89,5 +90,5 @@ void obj_draw(
     Vec3D rotation,
     Vec3D scale,
     Vec4D color,
-    Sprite *texture
+    Texture* texture
 );

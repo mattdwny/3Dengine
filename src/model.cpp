@@ -3,7 +3,7 @@
 #include "simple_logger.h"
 #include "model.h"
 
-#define __model_max 1024
+constexpr std::size_t __model_max = 1024;
 
 static Model ModelList[__model_max];
 
@@ -19,7 +19,7 @@ static void model_delete(Model *model)
 {
     if (!model)return;
     
-    FreeSprite(model->texture);
+//    FreeTexture(model->texture);
     if (model->vertex_array)
     {
         free(model->vertex_array);
@@ -67,7 +67,7 @@ Model *model_new()
             return &ModelList[i];
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 Model *model_get_by_filename(char *filename)
@@ -81,15 +81,14 @@ Model *model_get_by_filename(char *filename)
             return &ModelList[i];
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 void model_assign_texture(Model *model,char *texture)
 {
-    Sprite *sprite;
-    if (!model)return;
-    sprite = LoadSprite(texture,-1,-1);
-    if (!sprite)return;
+    if (!model) return;
+	Texture * sprite = get(hash(texture));
+	if (!sprite) return;
     model->texture = sprite;
 }
 
@@ -100,7 +99,7 @@ int model_allocate_triangle_buffer(Model *model, GLuint triangles)
         slog("no model specified");
         return -1;
     }
-    if (model->triangle_array != NULL)
+    if (model->triangle_array != nullptr)
     {
         slog("model %s already has a triangle buffer");
         return -1;
@@ -149,7 +148,7 @@ int model_allocate_vertex_buffer(Model *model, GLuint vertices)
         slog("no model specified");
         return -1;
     }
-    if (model->vertex_array != NULL)
+    if (model->vertex_array != nullptr)
     {
         slog("model %s already has a vertex buffer");
         return -1;
@@ -177,7 +176,7 @@ int model_allocate_attribute_buffer(Model *model, GLuint attributes)
         slog("no model specified");
         return -1;
     }
-    if (model->attribute_array != NULL)
+    if (model->attribute_array != nullptr)
     {
         slog("model %s already has a vertex buffer");
         return -1;
@@ -210,5 +209,3 @@ size_t model_get_vertex_buffer_size(Model *model)
     if (!model)return 0;
     return (sizeof(float)*3*model->num_vertices);
 }
-
-/*eol@eof*/

@@ -1,23 +1,23 @@
-#include "simple_logger.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <cstdio>
+#include <cstdarg>
 
-FILE * __log_file = NULL;
+#include "simple_logger.h"
+
+FILE * __log_file = nullptr;
 
 void close_logger()
 {
-    if (__log_file != NULL)
+    if (__log_file != nullptr)
     {
         fclose(__log_file);
-        __log_file = NULL;
+        __log_file = nullptr;
     }
 }
 
 void init_logger(const char *log_file_path)
 {
-    if (log_file_path == NULL)
+    if (log_file_path == nullptr)
     {
         __log_file = fopen("output.log","a");
     }
@@ -37,7 +37,7 @@ void _slog(char *f,int l,char *msg,...)
     vfprintf(stdout,msg,ap);
     fprintf(stdout,"\n");
     va_end(ap);
-    if (__log_file != NULL)
+    if (__log_file != nullptr)
     {
         va_start(ap,msg);
         fprintf(__log_file,"%s:%i: ",f,l);
@@ -46,6 +46,3 @@ void _slog(char *f,int l,char *msg,...)
         va_end(ap);
     }
 }
-
-
-/*eol@eof*/

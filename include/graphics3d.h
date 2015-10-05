@@ -1,5 +1,8 @@
 #pragma once
 
+#include "SDL.h"
+#include "GL/glew.h"
+
 /**
  * graphics3d
  * @license The MIT License (MIT)
@@ -20,18 +23,12 @@
  *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *    SOFTWARE.
  */
-#include <SDL.h>
-#include <GL/glew.h>
 
-#define EPSILON   1e-6f
-
-#define TWOPI 6.283185308
-
-/* conversion factor for converting from radians to degrees*/
-#define RADTODEG  57.295779513082
-
-/* conversion factor for converting from degrees to radians*/
-#define DEGTORAD  0.017453292519943295769236907684886
+constexpr GLfloat EPSILON = 1e-6;
+constexpr GLfloat PI = 3.141592653589793238;//atan(1.0) * 4;
+constexpr GLfloat TWOPI = 2 * PI;
+constexpr GLfloat RAD2DEG = 180 / PI;
+constexpr GLfloat DEG2RAD = PI / 180;
 
 /**
  * @brief initialize the 3d graphics system

@@ -1,3 +1,10 @@
+#include "simple_logger.h"
+#include "graphics3d.h"
+#include "shader.h"
+#include "obj.h"
+#include "vector.h"
+#include "Texture.h"
+
 /**
  * gametest3d
  * @license The MIT License (MIT)
@@ -18,12 +25,6 @@
  *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *    SOFTWARE.
  */
-#include "simple_logger.h"
-#include "graphics3d.h"
-#include "shader.h"
-#include "obj.h"
-#include "vector.h"
-#include "sprite.h"
 
 void set_camera(Vec3D position, Vec3D rotation);
 
@@ -37,7 +38,7 @@ int main(int argc, char *argv[])
     Vec3D cameraRotation = {90,0,0};
     SDL_Event e;
     Obj *obj,*bgobj;
-    Sprite *texture,*bgtext;
+    Texture *texture,*bgtext;
     const float triangleVertices[] = {
         0.0f, 0.5f, 0.0f, 1.0f,
         0.5f, -0.366f, 0.0f, 1.0f,
@@ -64,11 +65,11 @@ int main(int argc, char *argv[])
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangleVertices), triangleVertices, GL_STATIC_DRAW); //formatting the data for the buffer
     glBindBuffer(GL_ARRAY_BUFFER, 0); //unbind any buffers
     
-    obj = obj_load("models/cube.obj");
-    texture = LoadSprite("models/cube_text.png",1024,1024);
-
+    obj   = obj_load("models/cube.obj");
     bgobj = obj_load("models/mountainvillage.obj");
-    bgtext = LoadSprite("models/mountain_text.png",1024,1024);
+
+	texture = get(hash("png/cube_text.png"));
+    bgtext  = get(hash("png/mountain_text.png"));
     
 //    obj = obj_load("models/mountainvillage.obj");
     
@@ -101,8 +102,8 @@ int main(int argc, char *argv[])
                         cameraPosition,
                         cameraPosition,
                         vec3d(
-                            -sin(cameraRotation.z * DEGTORAD),
-                            cos(cameraRotation.z * DEGTORAD),
+                            -sin(cameraRotation.z * DEG2RAD),
+                            cos(cameraRotation.z * DEG2RAD),
                             0
                         ));
                 }
@@ -112,8 +113,8 @@ int main(int argc, char *argv[])
                         cameraPosition,
                         cameraPosition,
                         vec3d(
-                            sin(cameraRotation.z * DEGTORAD),
-                            -cos(cameraRotation.z * DEGTORAD),
+                            sin(cameraRotation.z * DEG2RAD),
+                            -cos(cameraRotation.z * DEG2RAD),
                             0
                         ));
                 }
@@ -123,8 +124,8 @@ int main(int argc, char *argv[])
                         cameraPosition,
                         cameraPosition,
                         vec3d(
-                            cos(cameraRotation.z * DEGTORAD),
-                            sin(cameraRotation.z * DEGTORAD),
+                            cos(cameraRotation.z * DEG2RAD),
+                            sin(cameraRotation.z * DEG2RAD),
                             0
                         ));
                 }
@@ -134,8 +135,8 @@ int main(int argc, char *argv[])
                         cameraPosition,
                         cameraPosition,
                         vec3d(
-                            -cos(cameraRotation.z * DEGTORAD),
-                            -sin(cameraRotation.z * DEGTORAD),
+                            -cos(cameraRotation.z * DEG2RAD),
+                            -sin(cameraRotation.z * DEG2RAD),
                             0
                         ));
                 }
@@ -200,5 +201,3 @@ void set_camera(Vec3D position, Vec3D rotation)
                  -position.y,
                  -position.z);
 }
-
-/*eol@eof*/

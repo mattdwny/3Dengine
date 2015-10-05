@@ -1,12 +1,14 @@
-#include "graphics3d.h"
+#include "SDL.h"
+#include "GL/glew.h"
+#include "GL/gl.h"
+#include "GL/glu.h"
+
 #include "simple_logger.h"
 #include "shader.h"
-#include <GL/gl.h>
-#include <GL/glu.h>
-
+#include "graphics3d.h"
 
 static SDL_GLContext __graphics3d_gl_context;
-static SDL_Window  * __graphics3d_window = NULL;
+static SDL_Window  * __graphics3d_window = nullptr;
 static GLuint        __graphics3d_shader_program;
 static Uint32        __graphics3d_frame_delay = 33;
 
@@ -40,14 +42,14 @@ int graphics3d_init(int sw,int sh,int fullscreen,const char *project,Uint32 fram
     
     
     __graphics3d_gl_context = SDL_GL_CreateContext(__graphics3d_window);
-    if (__graphics3d_gl_context == NULL)
+    if (__graphics3d_gl_context == nullptr)
     {
         slog("There was an error creating the OpenGL context!\n");
         return -1;
     }
     
     version = glGetString(GL_VERSION);
-    if (version == NULL) 
+    if (version == nullptr) 
     {
         slog("There was an error creating the OpenGL context!\n");
         return -1;
@@ -116,16 +118,15 @@ void graphics3d_frame_begin()
 
 void graphics3d_next_frame()
 {
-    static Uint32 then = 0;
-    Uint32 now;
+    static Uint32 prev = SDL_GetTicks();
     glPopMatrix();
     SDL_GL_SwapWindow(__graphics3d_window);
-    now = SDL_GetTicks();
-    if ((now - then) < __graphics3d_frame_delay)
+    Uint32 cur = SDL_GetTicks();
+    if (cur - prev < __graphics3d_frame_delay)
     {
-        SDL_Delay(__graphics3d_frame_delay - (now - then));        
+        SDL_Delay(__graphics3d_frame_delay - (cur - prev));        
     }
-    then = now;
+    prev = cur;
 }
 
 void graphics3d_setup_default_light()
@@ -177,6 +178,3 @@ void graphics3d_setup_default_light()
     glEnable(GL_DEPTH_TEST);
     
 }
-
-
-/*eol@eof*/

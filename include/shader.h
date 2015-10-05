@@ -1,4 +1,7 @@
 #pragma once
+
+#include "GL/glew.h"
+
 /**
  * shader
  * @license The MIT License (MIT)
@@ -19,7 +22,6 @@
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
  */
-#include <GL/glew.h>
 
 GLuint BuildShaderProgram(const char *vsPath, const char *fsPath);
 GLuint CreateShader(GLenum eShaderType, const char *strShaderFile);
